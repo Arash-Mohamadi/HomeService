@@ -5,6 +5,7 @@ import entity.users.Specialist;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,10 @@ public class Opinion extends BaseAbility {
     @ToString.Exclude
     @ManyToOne //bidirectional
     private Specialist specialist;
+
+    @OneToOne
+    @ToString.Exclude
+    private Order order;
 
     public Opinion(Integer score) {
         this.score = score;
