@@ -25,7 +25,10 @@ public class Suggestion extends BaseAbility {
     @CreationTimestamp
     private LocalTime timeAt;
     private double price;
-    private double workDuration;
+    private LocalTime startWork;
+    private LocalTime endWork;
+
+    private String day;
 
     @ToString.Exclude
     @ManyToOne
@@ -34,8 +37,10 @@ public class Suggestion extends BaseAbility {
     @ManyToOne
     private Order order;
 
-    public Suggestion(double price, double workDuration) {
+    public Suggestion(double price, LocalTime startWork, LocalTime endWork,String day) {
         this.price = price;
-        this.workDuration = workDuration;
+        this.startWork = startWork;
+        this.endWork = endWork;
+        this.day =day;
     }
 }
