@@ -2,6 +2,7 @@ package entity.capability;
 
 import entity.enums.OrderStatus;
 import entity.users.Customer;
+import entity.users.Specialist;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,19 @@ public class Order extends BaseAbility {
     @ToString.Exclude
     @ManyToOne
     private Customer customer;
+
+    @OneToOne
+    @ToString.Exclude
+    private SubServices subServices;
+
+
+    @OneToOne
+    @ToString.Exclude
+    private Opinion opinion;
+
+    @OneToOne
+    @ToString.Exclude
+    private Specialist specialist; ;
 
     public Order(double price, String description, String address) {
         this.price = price;
