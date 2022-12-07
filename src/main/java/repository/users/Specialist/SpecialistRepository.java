@@ -1,4 +1,4 @@
-package repository.users.Sopecialist;
+package repository.users.Specialist;
 
 
 import entity.users.Specialist;

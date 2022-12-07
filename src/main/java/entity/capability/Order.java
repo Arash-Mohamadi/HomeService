@@ -29,6 +29,11 @@ public class Order extends BaseAbility {
 
     private double price;
 
+    private LocalTime startWork;
+    private LocalTime endWork;
+
+    private String day;
+
     private String description;
     private String address;
 
@@ -43,7 +48,7 @@ public class Order extends BaseAbility {
     @ManyToOne
     private Customer customer;
 
-    @OneToOne
+    @ManyToOne
     @ToString.Exclude
     private SubServices subServices;
 
@@ -52,9 +57,9 @@ public class Order extends BaseAbility {
     @ToString.Exclude
     private Opinion opinion;
 
-    @OneToOne
+    @ManyToOne
     @ToString.Exclude
-    private Specialist specialist; ;
+    private Specialist specialist;
 
     public Order(double price, String description, String address) {
         this.price = price;

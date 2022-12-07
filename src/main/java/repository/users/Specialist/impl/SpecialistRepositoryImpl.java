@@ -1,4 +1,4 @@
-package repository.users.Sopecialist.impl;
+package repository.users.Specialist.impl;
 
 
 
@@ -6,7 +6,7 @@ package repository.users.Sopecialist.impl;
 import entity.users.Specialist;
 import jakarta.persistence.EntityManager;
 import repository.BaseRepositoryImpl;
-import repository.users.Sopecialist.SpecialistRepository;
+import repository.users.Specialist.SpecialistRepository;
 
 
 

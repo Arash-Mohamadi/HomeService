@@ -51,6 +51,11 @@ public class Specialist extends Person {
     @ToString.Exclude
     private Set<SubServices> subServicesSet;
 
+    @OneToMany(mappedBy = "specialist") //bidirectional
+    @ToString.Exclude
+    private List<Order> orders;
+
+
     public Specialist(String firstname, String lastname, String email, String username, String password, byte[] photo) {
         super(firstname, lastname, email, username, password);
         this.photo = photo;

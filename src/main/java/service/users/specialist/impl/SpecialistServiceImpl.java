@@ -1,15 +1,12 @@
 package service.users.specialist.impl;
 
-import entity.capability.Credit;
-import entity.capability.SubServices;
 import entity.enums.SpecialistStatus;
 import entity.enums.UserType;
 import entity.users.Specialist;
 import exception.CustomizedInvalidStatus;
 import exception.CustomizedNotFoundException;
 import jakarta.persistence.EntityManager;
-import repository.BaseRepository;
-import repository.users.Sopecialist.SpecialistRepository;
+import repository.users.Specialist.SpecialistRepository;
 import service.users.specialist.SpecialistService;
 import util.EntityManagerFactoryProvider;
 import validation.Validation;

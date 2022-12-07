@@ -40,6 +40,7 @@ public class Person extends BaseEntity<Long> {
     @Column(unique = true,nullable = false)
     @NotEmpty
     @NotNull
+    @Pattern(regexp = "^[A-Za-z0-9._]$")
     private String username;
     @Column(nullable = false)
     @NotEmpty

@@ -1,10 +1,7 @@
 package entity.capability;
 
 import entity.users.Specialist;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -12,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,6 +33,10 @@ public class SubServices extends BaseAbility {
     @ToString.Exclude
     @ManyToMany(mappedBy = "subServicesSet")
     private Set<Specialist> specialistSet;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "subServices")
+    private List<Order> orders;
 
     public void addSpecialist(Specialist specialist){
         this.getSpecialistSet().add(specialist);

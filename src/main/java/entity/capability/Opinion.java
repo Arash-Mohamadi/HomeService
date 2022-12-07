@@ -29,7 +29,7 @@ public class Opinion extends BaseAbility {
     @ManyToOne //bidirectional
     private Specialist specialist;
 
-    @OneToOne
+    @OneToOne(mappedBy = "opinion")
     @ToString.Exclude
     private Order order;
 

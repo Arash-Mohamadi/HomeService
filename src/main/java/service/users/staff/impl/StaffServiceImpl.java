@@ -15,7 +15,7 @@ import repository.capability.credit.CreditRepository;
 import repository.capability.services.ServicesRepository;
 import repository.capability.subservices.SubServicesRepository;
 import repository.users.Staff.StaffRepository;
-import repository.users.Sopecialist.SpecialistRepository;
+import repository.users.Specialist.SpecialistRepository;
 import service.users.staff.StaffService;
 import util.EntityManagerFactoryProvider;
 import validation.Validation;
@@ -82,9 +82,12 @@ public class StaffServiceImpl implements StaffService {
                 Validation.checkEntity(subServices); // exception handler for duplicate name .
                 subServices.setServices(services);
                 subServicesRepository.save(entityManager, subServices);
-            } else {
-                throw new CustomizedNotFoundException(" services is not found");
             }
+            else {
+                  System.out.println("services is not found");
+//                throw new CustomizedNotFoundException(" services is not found");
+           }
+
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
