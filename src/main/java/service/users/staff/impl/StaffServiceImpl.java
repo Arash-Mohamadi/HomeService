@@ -80,13 +80,13 @@ public class StaffServiceImpl implements StaffService {
             services = servicesRepository.findById(entityManager, servicesId);
             if (services != null) {
                 Validation.checkEntity(subServices); // exception handler for duplicate name .
-                subServices.setServices(services);
+                services.addSubServices(subServices);
                 subServicesRepository.save(entityManager, subServices);
-            }
-            else {
-                  System.out.println("services is not found");
+                servicesRepository.update(entityManager, services);
+            } else {
+                System.out.println("services is not found");
 //                throw new CustomizedNotFoundException(" services is not found");
-           }
+            }
 
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -110,10 +110,12 @@ public class StaffServiceImpl implements StaffService {
                 if (subServices != null) {
                     subServicesRepository.removeOfServices(entityManager, servicesId, subServicesId);
                 } else {
-                    throw new CustomizedNotFoundException(" subServices is not found");
+                    System.out.println(" subServices is not found");
+                    //  throw new CustomizedNotFoundException(" subServices is not found");
                 }
             } else {
-                throw new CustomizedNotFoundException(" Services is not found");
+                System.out.println(" Services is not found");
+                // throw new CustomizedNotFoundException(" Services is not found");
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -135,7 +137,8 @@ public class StaffServiceImpl implements StaffService {
                 servicesRepository.save(entityManager, services);
 
             } else {
-                throw new CustomizedNotFoundException(" Services is not found");
+                System.out.println(" Services is not found");
+                //  throw new CustomizedNotFoundException(" Services is not found");
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -158,7 +161,8 @@ public class StaffServiceImpl implements StaffService {
                 subServicesRepository.save(entityManager, subServiceFound);
 
             } else {
-                throw new CustomizedNotFoundException(" subServices is not found");
+                System.out.println(" subServices is not found");
+                //  throw new CustomizedNotFoundException(" subServices is not found");
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -178,19 +182,19 @@ public class StaffServiceImpl implements StaffService {
             subServiceFound = subServicesRepository.findById(entityManager, subServicesId);
             if (subServiceFound != null) {
                 specialistFound = specialistRepository.findById(entityManager, specialistId);
-                if (specialistFound.getStatus()==SpecialistStatus.CONFIRMED){
+                if (specialistFound.getStatus() == SpecialistStatus.CONFIRMED) {
                     subServiceFound.addSpecialist(specialistFound);
-//                    specialistRepository.update(entityManager,specialistFound);
-//                    subServicesRepository.update(entityManager,subServiceFound);
+                    specialistRepository.update(entityManager, specialistFound);
+                    subServicesRepository.update(entityManager, subServiceFound);
                     // can to update
                     entityManager.getTransaction().commit();
+                } else {
+                    System.out.println(" status of specialist is not allowed");
+                    //  throw new CustomizedInvalidStatus(" status of specialist is not allowed");
                 }
-                else {
-                    throw new CustomizedInvalidStatus(" status of specialist is not allowed");
-                }
-            }
-            else {
-                throw new CustomizedNotFoundException(" subServices is not found");
+            } else {
+                System.out.println(" subServices is not found");
+                // throw new CustomizedNotFoundException(" subServices is not found");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -213,11 +217,12 @@ public class StaffServiceImpl implements StaffService {
                     specialistFound.getSubServicesSet().remove(subServiceFound);
                     specialistRepository.update(entityManager, specialistFound);
                 } else {
-                    //   System.out.println(" specialist not found");
-                    throw new CustomizedNotFoundException(" specialist not found");
+                    System.out.println(" specialist not found");
+                    //  throw new CustomizedNotFoundException(" specialist not found");
                 }
             } else {
-                throw new CustomizedNotFoundException(" subServices is not found");
+                System.out.println(" subServices is not found");
+                //   throw new CustomizedNotFoundException(" subServices is not found");
             }
 
             entityManager.getTransaction().commit();
@@ -243,11 +248,12 @@ public class StaffServiceImpl implements StaffService {
                     specialistFound.getServicesSet().remove(serviceFound);
                     specialistRepository.update(entityManager, specialistFound);
                 } else {
-                    //   System.out.println(" specialist not found");
-                    throw new CustomizedNotFoundException(" specialist not found");
+                    System.out.println(" specialist not found");
+                    //  throw new CustomizedNotFoundException(" specialist not found");
                 }
             } else {
-                throw new CustomizedNotFoundException(" subServices is not found");
+                System.out.println(" subServices is not found");
+                //   throw new CustomizedNotFoundException(" subServices is not found");
             }
 
             entityManager.getTransaction().commit();
@@ -270,10 +276,11 @@ public class StaffServiceImpl implements StaffService {
                     specialistFound.setStatus(SpecialistStatus.CONFIRMED);
                     Credit credit = new Credit();
                     specialistFound.setCredit(credit);
-                    creditRepository.save(entityManager,credit);
-                    specialistRepository.update(entityManager,specialistFound);
+                    creditRepository.save(entityManager, credit);
+                    specialistRepository.update(entityManager, specialistFound);
                 } else {
-                    throw new CustomizedNotFoundException(" specialist not found");
+                    System.out.println(" specialist not found");
+                    //    throw new CustomizedNotFoundException(" specialist not found");
                 }
                 entityManager.getTransaction().commit();
             } catch (Exception e) {
@@ -282,7 +289,8 @@ public class StaffServiceImpl implements StaffService {
             }
 
         } else {
-            throw new CustomizedInvalidStatus("only manager is allowed");
+            System.out.println("only manager is allowed");
+            //    throw new CustomizedInvalidStatus("only manager is allowed");
         }
     }
 
@@ -299,7 +307,8 @@ public class StaffServiceImpl implements StaffService {
                 admin.setPassword(password);
                 adminRepository.update(entityManager, admin);
             } else {
-                throw new CustomizedNotFoundException(" admin  not found");
+                System.out.println(" admin  not found");
+                //  throw new CustomizedNotFoundException(" admin  not found");
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {

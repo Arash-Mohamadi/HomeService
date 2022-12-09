@@ -27,7 +27,7 @@ public class SubServices extends BaseAbility {
     private String name;
 
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne ////bidirectional
     private Services services;
 
     @ToString.Exclude
@@ -41,6 +41,11 @@ public class SubServices extends BaseAbility {
     public void addSpecialist(Specialist specialist){
         this.getSpecialistSet().add(specialist);
         specialist.getSubServicesSet().add(this);
+    }
+
+    public  void addOrder(Order order){
+        this.getOrders().add(order);
+        order.setSubServices(this);
     }
 
     public SubServices(double basePrice, String description, String name) {

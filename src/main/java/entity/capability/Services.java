@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,7 @@ public class Services extends BaseAbility {
     @Column(unique = true)
     @NotNull
     @NotEmpty
+    @UniqueElements()
     private String name;
 
     @ToString.Exclude
@@ -34,6 +36,11 @@ public class Services extends BaseAbility {
     public void addSpecialist(Specialist specialist){
         this.getSpecialistSet().add(specialist);
         specialist.getServicesSet().add(this);
+    }
+
+    public void addSubServices(SubServices subServices){
+        this.getSubList().add(subServices);
+        subServices.setServices(this);
     }
 
     public Services(String name) {

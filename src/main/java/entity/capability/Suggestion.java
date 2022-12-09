@@ -21,22 +21,22 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class Suggestion extends BaseAbility {
     @CreationTimestamp
-    private LocalDate dateAt;
+    private LocalDate creationDate;
     @CreationTimestamp
-    private LocalTime timeAt;
+    private LocalTime creationTime;
     private double price;
 
-    private double duration;
+    private double duration; //  unit of hour
 
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne  //bidirectional
     private Specialist specialist;
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne //bidirectional
     private Order order;
 
-    public Suggestion(double price, LocalTime startWork, LocalTime endWork) {
+    public Suggestion(double price, double duration) {
         this.price = price;
-
+        this.duration = duration;
     }
 }

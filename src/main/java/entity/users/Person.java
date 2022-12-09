@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.time.LocalTime;
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString
 public class Person extends BaseEntity<Long> {
 
 
@@ -49,10 +51,10 @@ public class Person extends BaseEntity<Long> {
     private String password;
 
     @CreationTimestamp
-    private LocalDate dateAt;
+    private LocalDate dateOfSignup;
 
     @CreationTimestamp
-    private LocalTime timeAt;
+    private LocalTime timeOfSignup;
 
     @Enumerated(EnumType.STRING)
     private UserType userType;

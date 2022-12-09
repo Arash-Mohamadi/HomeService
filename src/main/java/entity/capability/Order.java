@@ -22,10 +22,10 @@ import java.util.List;
 @Table(name = "orders")
 public class Order extends BaseAbility {
     @CreationTimestamp
-    private LocalDate dateAt;
+    private LocalDate creationDate;
 
     @CreationTimestamp
-    private LocalTime timeAt;
+    private LocalTime creationTime;
 
     private double price;
 
@@ -45,24 +45,36 @@ public class Order extends BaseAbility {
     private List<Suggestion> suggestions;
 
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne //bidirectional
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne //bidirectional
     @ToString.Exclude
     private SubServices subServices;
 
 
-    @OneToOne
+    @OneToOne //bidirectional
     @ToString.Exclude
     private Opinion opinion;
 
-    @ManyToOne
+    @ManyToOne //bidirectional
     @ToString.Exclude
     private Specialist specialist;
 
-    public Order(double price, String description, String address) {
+    public void addSuggestion(Suggestion suggestion){
+        this.getSuggestions().add(suggestion);
+        suggestion.setOrder(this);
+    }
+
+    public void setOrderWithOpinion(Opinion opinion){
+        this.setOpinion(opinion);
+        opinion.setOrder(this);
+    }
+    public Order(double price, LocalTime startWork, LocalTime endWork, String day, String description, String address) {
         this.price = price;
+        this.startWork = startWork;
+        this.endWork = endWork;
+        this.day = day;
         this.description = description;
         this.address = address;
     }

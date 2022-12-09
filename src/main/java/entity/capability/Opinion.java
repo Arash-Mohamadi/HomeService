@@ -6,16 +6,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @ToString
 @Getter
 @Setter
 @NoArgsConstructor
+//@Builder
 public class Opinion extends BaseAbility {
     @Column(nullable = false)
     private double score;
